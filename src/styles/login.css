@@ -1,0 +1,11 @@
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.login .am-tabs-default-bar-underline {
+  border-width: 2px;
+}

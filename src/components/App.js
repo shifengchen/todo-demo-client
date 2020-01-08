@@ -1,11 +1,16 @@
 import React from 'react';
-import List from './List'
+import { Switch, Route } from 'react-router-dom'
+import Login from './Login'
+import Home from './Home'
 import '../styles/App.css';
 
 function App() {
   return (
     <div className="App">
-      <List />
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/login" component={Login} />
+      </Switch>
     </div>
   );
 }
