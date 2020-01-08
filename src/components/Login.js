@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Tabs, DatePicker, List, InputItem } from 'antd-mobile'
+import { Tabs, List, InputItem } from 'antd-mobile'
 import '../styles/login.css'
 
 const tabs = [

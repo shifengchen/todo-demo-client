@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import moment from 'moment'
+
+const dateFormat = 'YYYY-MM-DD'
 
 class ListItem extends Component {
   render() {
@@ -7,8 +10,12 @@ class ListItem extends Component {
 
     return (
       <div className="list-tiem">
-        <span>{info}</span>
-        <span>{deadline}</span>
+        <span>
+          <span>{info}</span>
+        </span>
+        <span className="gray-text">
+          {deadline ? moment(deadline).format(dateFormat) : ''}
+        </span>
       </div>
     )
   }

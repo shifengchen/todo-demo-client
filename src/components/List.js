@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Query } from 'react-apollo'
 import gql from 'graphql-tag'
+import { Icon } from 'antd-mobile'
 import ListItem from './ListItem'
 
 const LIST_QUERY = gql`
@@ -19,7 +20,7 @@ class List extends Component {
       <div className="list">
         <Query query={LIST_QUERY}>
           {({ loading, error, data }) => {
-            if (loading) return <div>Fetching</div>
+            if (loading) return <div><Icon type="loading" /> Fetching</div>
             if (error) return <div>Error</div>
 
             const list = data.list
