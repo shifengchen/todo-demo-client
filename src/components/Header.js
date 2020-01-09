@@ -10,7 +10,7 @@ class Header extends Component {
     return (
       <div className="header">
         <NavBar
-          leftContent="三"
+          leftContent={<i className="fa fa-navicon" />}
           onLeftClick={this.onOpenChange}
           rightContent={[
             <Icon key="0" type="search" style={{ marginRight: '16px' }} />,

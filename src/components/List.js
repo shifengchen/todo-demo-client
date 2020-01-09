@@ -20,7 +20,11 @@ class List extends Component {
       <div className="list">
         <Query query={LIST_QUERY}>
           {({ loading, error, data }) => {
-            if (loading) return <div><Icon type="loading" /> Fetching</div>
+            if (loading) return (
+              <div className="list-loading">
+                <Icon type="loading" /> Fetching
+              </div>
+            )
             if (error) return <div>Error</div>
 
             const list = data.list
