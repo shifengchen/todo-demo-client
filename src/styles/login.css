@@ -1,9 +1,10 @@
 .login {
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   flex-direction: column;
   height: 100vh;
+  padding-top: 30%;
 }
 
 .login .am-tabs-default-bar-underline {
