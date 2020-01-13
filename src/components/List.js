@@ -22,7 +22,7 @@ class List extends Component {
           {({ loading, error, data }) => {
             if (loading) return (
               <div className="list-loading">
-                <Icon type="loading" /> Fetching
+                <Icon type="loading" />
               </div>
             )
             if (error) return <div>Error</div>

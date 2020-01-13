@@ -17,11 +17,33 @@ const CREATE_MUTATION = gql`
   }
 `
 
+const UPDATE_MUTATION = gql`
+  mutation UpdateMutation($id: String!, $info: String!, $deadline: String!) {
+    updateTodo(id: $id, info: $info, deadline: $deadline) {
+      id
+    }
+  }
+`
+
+const DELETE_MUTATION = gql`
+  mutation DeleteMutation($id: String!) {
+    deleteTodo(id: $id) {
+      id
+      info
+      deadline
+    }
+  }
+`
+
 class Create extends Component {
-  state = {
-    info: '',
-    cVisible: false, // 日历控件显示
-    deadline: '',
+  constructor(props) {
+    super(props)
+    const { info, deadline } = props.data || {}
+    this.state = {
+      info: info || '',
+      cVisible: false, // 日历控件显示
+      deadline: deadline || '',
+    }
   }
 
   handleInput = val => {
@@ -39,13 +61,24 @@ class Create extends Component {
     this.handleCVisible(false)
   }
 
+  handleClick = (mutation) => {
+    const { click } = this.props
+    mutation()
+    if (click) {
+      click()
+    }
+  }
+
   render() {
+    const { data = {} } = this.props
+    const { id } = data
     const { cVisible, info, deadline } = this.state
 
     return (
       <div className="create">
         <InputItem
           placeholder="准备做什么？"
+          value={info}
           onChange={this.handleInput}
         />
         <div className="other">
@@ -54,18 +87,30 @@ class Create extends Component {
               <i className="fa fa-calendar" />
             </span>
             <span>!!!</span>
+            {id && (
+              <Mutation
+                mutation={DELETE_MUTATION}
+                variables={{ id }}
+              >
+                {deleteMutation => (
+                  <span onClick={() => this.handleClick(deleteMutation)}>
+                    <i className="fa fa-trash-o" />
+                  </span>
+                )}
+              </Mutation>
+            )}
           </div>
           <Mutation
-            mutation={CREATE_MUTATION}
-            variables={{ info, deadline }}
+            mutation={id ? UPDATE_MUTATION : CREATE_MUTATION}
+            variables={{ id, info, deadline }}
             onCompleted={() => { console.log('success') }}
           >
-            {createMutation => (
+            {mutation => (
               <Button
                 inline
                 size="small"
                 type="primary"
-                onClick={createMutation}
+                onClick={() => this.handleClick(mutation)}
               >
                 确定
               </Button>

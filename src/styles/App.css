@@ -9,11 +9,18 @@
   padding: 20px;
 }
 
-.list-tiem {
+.list-item {
+  padding: 12px;
+}
+
+.list-item .item-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px;
+  margin-top: 12px;
+}
+.list-item .item-info:first-child {
+  margin-top: 0;
 }
 
 .gray-text {
@@ -33,4 +40,16 @@
 .tag span {
   display: inline-block;
   margin-right: 16px;
+}
+
+/********* TodoDetail **********/
+.todo-detail {
+  width: 80% !important;
+  height: 30% !important;
+}
+
+.todo-detail .am-modal-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
