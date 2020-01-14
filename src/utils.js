@@ -6,3 +6,7 @@ export function setLocal(key, data) {
 export function getLocal(key) {
   return JSON.parse(localStorage.getItem(key))
 }
+
+export function removeLocal(key) {
+  return localStorage.removeItem(key)
+}

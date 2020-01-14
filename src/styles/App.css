@@ -53,3 +53,27 @@
   align-items: center;
   justify-content: center;
 }
+
+/******** Drawer *********/
+.user-drawer.am-drawer-open.am-drawer.am-drawer-left .am-drawer-sidebar {
+  width: 61.8%;
+  padding: 6px;
+  background: #fff;
+}
+
+/******** User ***********/
+.user-info {
+
+}
+
+.user-info .avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 1px solid #eee;
+}
+
+.user-info .item {
+  padding: 9px 15px;
+  font-size: 17px;
+}

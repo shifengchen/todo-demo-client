@@ -51,6 +51,7 @@ class Create extends Component {
   }
 
   handleCVisible = cVisible => {
+    console.log('cVisible', cVisible);
     this.setState({ cVisible })
   }
 
