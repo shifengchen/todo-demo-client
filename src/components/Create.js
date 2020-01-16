@@ -3,6 +3,8 @@ import moment from 'moment'
 import { InputItem, Calendar, Button } from 'antd-mobile'
 import { Mutation } from 'react-apollo'
 import gql from 'graphql-tag'
+import { BE_SELECTED } from '../constants'
+import { setLocal } from '../utils'
 
 const dateFormat = 'YYYY-MM-DD'
 
@@ -41,8 +43,8 @@ class Create extends Component {
     const { info, deadline } = props.data || {}
     this.state = {
       info: info || '',
-      cVisible: false, // 日历控件显示
       deadline: deadline || '',
+      cVisible: false, // 日历控件显示
     }
   }
 
@@ -51,7 +53,6 @@ class Create extends Component {
   }
 
   handleCVisible = cVisible => {
-    console.log('cVisible', cVisible);
     this.setState({ cVisible })
   }
 
@@ -62,11 +63,21 @@ class Create extends Component {
     this.handleCVisible(false)
   }
 
-  handleClick = (mutation) => {
-    const { click } = this.props
+  handleClick = (mutation, operation) => {
+    const { click, data = {} } = this.props
+    const { id } = data
+    setLocal(BE_SELECTED, {
+      operation,
+      id
+    })
     mutation()
     if (click) {
       click()
+    }
+    if (operation === 'create') {
+      this.setState({
+        info: ''
+      })
     }
   }
 
@@ -94,7 +105,7 @@ class Create extends Component {
                 variables={{ id }}
               >
                 {deleteMutation => (
-                  <span onClick={() => this.handleClick(deleteMutation)}>
+                  <span onClick={() => this.handleClick(deleteMutation, 'delete')}>
                     <i className="fa fa-trash-o" />
                   </span>
                 )}
@@ -106,16 +117,19 @@ class Create extends Component {
             variables={{ id, info, deadline }}
             onCompleted={() => { console.log('success') }}
           >
-            {mutation => (
-              <Button
-                inline
-                size="small"
-                type="primary"
-                onClick={() => this.handleClick(mutation)}
-              >
-                确定
-              </Button>
-            )}
+            {mutation => {
+              const operation = id ? 'update' : 'create'
+              return (
+                <Button
+                  inline
+                  size="small"
+                  type="primary"
+                  onClick={() => this.handleClick(mutation, operation)}
+                >
+                  确定
+                </Button>
+              )
+            }}
           </Mutation>
         </div>
         <Calendar

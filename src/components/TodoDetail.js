@@ -13,7 +13,7 @@ class TodoDetail extends React.Component {
         visible={visible}
         onClose={() => handleClick(false)}
       >
-        <Create data={data} />
+        <Create data={data} click={() => handleClick(false)} />
       </Modal>
     )
   }
